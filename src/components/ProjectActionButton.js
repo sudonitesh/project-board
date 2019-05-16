@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import Icon from '@material-ui/core/Icon'
-import { Card, Button } from '@material-ui/core';
-import Textarea from 'react-textarea-autosize';
-import {connect} from 'react-redux'
+import { Card, Button } from '@material-ui/core'
+import Textarea from 'react-textarea-autosize'
+import { connect } from 'react-redux'
 
-import {addCard, addList} from '../actions'
+import { addCard, addList } from '../actions'
 
 class ProjectActionButton extends Component {
   state = {
     formOpen: false,
-    text: ""
+    text: ''
   }
 
   openForm = () => {
@@ -30,24 +30,24 @@ class ProjectActionButton extends Component {
   }
 
   handleAddList = () => {
-    const {dispatch} = this.props
-    const {text} = this.state
+    const { dispatch } = this.props
+    const { text } = this.state
 
-    if(text) {
+    if (text) {
       this.setState({
-        text: ""
+        text: ''
       })
       dispatch(addList(text))
     }
-    return    
+    return
   }
 
   handleAddCard = () => {
-    const {dispatch, listID} = this.props
-    const {text} = this.state
-    if(text) {
+    const { dispatch, listID } = this.props
+    const { text } = this.state
+    if (text) {
       this.setState({
-        text: ""
+        text: ''
       })
       dispatch(addCard(listID, text))
     }
@@ -77,19 +77,21 @@ class ProjectActionButton extends Component {
   }
 
   renderForm = () => {
-    const {list} = this.props
-    const placeholder = list ? "Enter list title" : "enter title for card"
-    const btnTitle = list ? "Add list" : "Add card"
+    const { list } = this.props
+    const placeholder = list ? 'Enter list title' : 'enter title for card'
+    const btnTitle = list ? 'Add list' : 'Add card'
 
-    return(
+    return (
       <div>
-        <Card style={{
-          minHeight: 80,
-          // minWidth: 272,
-          marginLeft: 8,
-          marginRight: 8,
-          padding: "6px 8px 2px"
-        }}>
+        <Card
+          style={{
+            minHeight: 80,
+            // minWidth: 272,
+            marginLeft: 8,
+            marginRight: 8,
+            padding: '6px 8px 2px'
+          }}
+        >
           <Textarea
             placeholder={placeholder}
             autoFocus
@@ -97,19 +99,28 @@ class ProjectActionButton extends Component {
             value={this.state.text}
             onChange={this.handleInputChange}
             style={{
-              resize: "none",
-              width: "100%",
-              outline: "none",
-              border: "none",
-              overflow: "hidden"
+              resize: 'none',
+              width: '100%',
+              outline: 'none',
+              border: 'none',
+              overflow: 'hidden'
             }}
           />
         </Card>
         <div style={styles.formBtnGroup}>
-          <Button variant="contained" style={{color: "white", backgroundColor: "#5aac44"}}>
+          <Button
+            variant="contained"
+            onMouseDown={list ? this.handleAddList : this.handleAddCard}
+            style={{ color: 'white', backgroundColor: '#5aac44' }}
+          >
             {btnTitle}
           </Button>
-          <Icon style={{marginLeft: "8px", cursor: "pointer"}}>close</Icon>
+          <Icon
+            style={{ marginLeft: '8px', cursor: 'pointer' }}
+            onClick={this.closeForm}
+          >
+            close
+          </Icon>
         </div>
       </div>
     )

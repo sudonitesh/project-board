@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProjectList from "./ProjectList";
 import { connect } from "react-redux";
-
+import ProjectActionButton from './ProjectActionButton'
 class App extends Component {
   render() {
     const { lists } = this.props;
@@ -12,6 +12,7 @@ class App extends Component {
           {lists.map(list => (
             <ProjectList key={list.id} title={list.title} cards={list.cards} />
           ))}
+          <ProjectActionButton list />
         </div>
       </div>
     );

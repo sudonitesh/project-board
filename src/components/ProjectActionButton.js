@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Icon from '@material-ui/core/Icon'
 import { Card, Button } from '@material-ui/core';
 import Textarea from 'react-textarea-autosize';
+import {connect} from 'react-redux'
+
+import {addCard, addList} from '../actions'
 
 class ProjectActionButton extends Component {
   state = {
@@ -24,6 +27,30 @@ class ProjectActionButton extends Component {
     this.setState({
       text: e.target.value
     })
+  }
+
+  handleAddList = () => {
+    const {dispatch} = this.props
+    const {text} = this.state
+
+    if(text) {
+      this.setState({
+        text: ""
+      })
+      dispatch(addList(text))
+    }
+    return    
+  }
+
+  handleAddCard = () => {
+    const {dispatch, listID} = this.props
+    const {text} = this.state
+    if(text) {
+      this.setState({
+        text: ""
+      })
+      dispatch(addCard(listID, text))
+    }
   }
 
   renderAddBtn = () => {
@@ -108,4 +135,4 @@ const styles = {
   }
 }
 
-export default ProjectActionButton
+export default connect()(ProjectActionButton)

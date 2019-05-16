@@ -2,16 +2,30 @@ import React from 'react'
 
 import ProjectCard from './ProjectCard'
 import ProjectActionButton from './ProjectActionButton'
+import { Droppable } from 'react-beautiful-dnd'
 
-const ProjectList = ({ title, cards }) => {
+const ProjectList = ({ title, cards, listID }) => {
   console.log(cards)
   return (
     <div style={styles.container}>
-      <h3>{title}</h3>
-      {cards.map(card => (
-        <ProjectCard key={card.id} text={card.text} />
-      ))}
-      <ProjectActionButton/>
+      <h4>{title}</h4>
+
+      <Droppable droppableId={String(listID)}>
+        {provided => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {cards.map((card, index) => (
+              <ProjectCard
+                key={card.id}
+                text={card.text}
+                id={card.id}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+      <ProjectActionButton listID={listID} />
     </div>
   )
 }
@@ -22,7 +36,7 @@ const styles = {
     borderRadius: 3,
     width: 300,
     padding: 8,
-    height: "100%",
+    height: '100%',
     marginRight: 8
   }
 }

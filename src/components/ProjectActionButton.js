@@ -85,7 +85,9 @@ class ProjectActionButton extends Component {
       <div>
         <Card style={{
           minHeight: 80,
-          minWidth: 272,
+          // minWidth: 272,
+          marginLeft: 8,
+          marginRight: 8,
           padding: "6px 8px 2px"
         }}>
           <Textarea
@@ -125,13 +127,15 @@ const styles = {
     cursor: 'pointer',
     borderRadius: 3,
     height: 36,
-    width: 272,
-    paddingLeft: 10
+    // width: 272,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   formBtnGroup: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: 8
+    marginTop: 8,
+    marginLeft: 8
   }
 }
 

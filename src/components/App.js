@@ -12,9 +12,6 @@ class App extends Component {
     if (!destination) {
       return
     }
-    if (type === 'list') {
-      return
-    }
 
     this.props.dispatch(
       sort(
@@ -22,7 +19,8 @@ class App extends Component {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
       )
     )
   }
@@ -31,10 +29,10 @@ class App extends Component {
     const { lists } = this.props
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
+        <h3>project manager</h3>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <h2>Hello Youtube</h2>
               <div style={styles.listsContainer}>
                 {lists.map((list, index) => (
                   <ProjectList
@@ -45,9 +43,10 @@ class App extends Component {
                     index={index}
                   />
                 ))}
+                {provided.placeholder}
                 <ProjectActionButton list />
               </div>
-              {provided.placeholder}
+              
             </div>
           )}
         </Droppable>

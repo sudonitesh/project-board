@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import ProjectList from './ProjectList'
 import { connect } from 'react-redux'
 import ProjectActionButton from './ProjectActionButton'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
-import {sort} from '../actions'
+import { sort } from '../actions'
 class App extends Component {
   onDragEnd = result => {
-    const { destination, source, draggableId } = result
+    const { destination, source, draggableId, type } = result
 
     if (!destination) {
+      return
+    }
+    if (type === 'list') {
       return
     }
 
@@ -28,20 +31,26 @@ class App extends Component {
     const { lists } = this.props
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div>
-          <h2>pro</h2>
-          <div style={styles.listsContainer}>
-            {lists.map(list => (
-              <ProjectList
-                listID={list.id}
-                key={list.id}
-                title={list.title}
-                cards={list.cards}
-              />
-            ))}
-            <ProjectActionButton list />
-          </div>
-        </div>
+        <Droppable droppableId="all-lists" direction="horizontal" type="list">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              <h2>Hello Youtube</h2>
+              <div style={styles.listsContainer}>
+                {lists.map((list, index) => (
+                  <ProjectList
+                    listID={list.id}
+                    key={list.id}
+                    title={list.title}
+                    cards={list.cards}
+                    index={index}
+                  />
+                ))}
+                <ProjectActionButton list />
+              </div>
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </DragDropContext>
     )
   }

@@ -2,31 +2,41 @@ import React from 'react'
 
 import ProjectCard from './ProjectCard'
 import ProjectActionButton from './ProjectActionButton'
-import { Droppable } from 'react-beautiful-dnd'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-const ProjectList = ({ title, cards, listID }) => {
-  console.log(cards)
+const ProjectList = ({ title, cards, listID, index }) => {
   return (
-    <div style={styles.container}>
-      <h4>{title}</h4>
-
-      <Droppable droppableId={String(listID)}>
-        {provided => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-            {cards.map((card, index) => (
-              <ProjectCard
-                key={card.id}
-                text={card.text}
-                id={card.id}
-                index={index}
-              />
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-      <ProjectActionButton listID={listID} />
-    </div>
+    <Draggable draggableId={String(listID)} index={index}>
+      {provided => (
+        <div
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <Droppable droppableId={String(listID)} type="card">
+            {provided => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={styles.container}
+              >
+                <h4>{title}</h4>
+                {cards.map((card, index) => (
+                  <ProjectCard
+                    key={card.id}
+                    text={card.text}
+                    id={card.id}
+                    index={index}
+                  />
+                ))}
+                {provided.placeholder}
+                <ProjectActionButton listID={listID} />
+              </div>
+            )}
+          </Droppable>
+        </div>
+      )}
+    </Draggable>
   )
 }
 

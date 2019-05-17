@@ -6,48 +6,56 @@ import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import Icon from "@material-ui/core/Icon";
 import ProjectForm from "./ProjectForm";
+import { editCard } from "../actions";
+import { connect } from "react-redux";
+import ProjectButton from "./ProjectButton";
 
-const CardContainer = styled.div`
-  margin: 0 0 8px 0;
-  position: relative;
-`;
-
-const EditButton = styled(Icon)`
-  position: absolute;
-  display: none;
-  right: 5px;
-  top: 5px;
-  opacity: 0.5;
-  ${CardContainer}:hover & {
-    display: block;
-    cursor: pointer;
-  }
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const ProjectCard = ({ text, id, index }) => {
+const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [cardText, setCardText] = useState(text);
+  const [cardText, setText] = useState(text);
+
+  const CardContainer = styled.div`
+    margin: 0 0 8px 0;
+    position: relative;
+    max-width: 100%;
+    word-wrap: break-word;
+  `;
+
+  const EditButton = styled(Icon)`
+    position: absolute;
+    display: none;
+    right: 5px;
+    top: 5px;
+    opacity: 0.5;
+    ${CardContainer}:hover & {
+      display: block;
+      cursor: pointer;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  `;
 
   const closeForm = e => {
-    console.log("clicked");
     setIsEditing(false);
   };
 
-  const saveCard = () => {
-    // run redux action
+  const handleChange = e => {
+    setText(e.target.value);
+  };
+
+  const saveCard = e => {
+    e.preventDefault();
+
+    dispatch(editCard(id, listID, cardText));
+    setIsEditing(false);
   };
 
   const renderEditForm = () => {
     return (
-      <ProjectForm
-        text={cardText}
-        setText={setCardText}
-        closeForm={closeForm}
-        actionBtnClicked={saveCard}
-      />
+      <ProjectForm text={cardText} onChange={handleChange} closeForm={closeForm}>
+        <ProjectButton onClick={saveCard}>Save</ProjectButton>
+      </ProjectForm>
     );
   };
 
@@ -62,7 +70,12 @@ const ProjectCard = ({ text, id, index }) => {
             onDoubleClick={() => setIsEditing(true)}
           >
             <Card>
-              <EditButton onClick={() => setIsEditing(true)} fontSize="small">edit</EditButton>
+              <EditButton
+                onMouseDown={() => setIsEditing(true)}
+                fontSize="small"
+              >
+                edit
+              </EditButton>
               <CardContent>
                 <Typography>{text}</Typography>
               </CardContent>
@@ -74,6 +87,6 @@ const ProjectCard = ({ text, id, index }) => {
   };
 
   return isEditing ? renderEditForm() : renderCard();
-};
+});
 
-export default ProjectCard;
+export default connect()(ProjectCard);

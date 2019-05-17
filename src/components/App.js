@@ -1,11 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import ProjectList from './ProjectList'
 import { connect } from 'react-redux'
-import ProjectActionButton from './ProjectActionButton'
+import ProjectCreate from './ProjectCreate'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-
+import styled from 'styled-components'
 import { sort } from '../actions'
-class App extends Component {
+
+const ListsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+// TODO: Fix performance issue
+
+class App extends PureComponent {
   onDragEnd = result => {
     const { destination, source, draggableId, type } = result
 
@@ -29,37 +37,29 @@ class App extends Component {
     const { lists } = this.props
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <h3>project manager</h3>
+        <h2>Hello Youtube</h2>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {provided => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              <div style={styles.listsContainer}>
-                {lists.map((list, index) => (
-                  <ProjectList
-                    listID={list.id}
-                    key={list.id}
-                    title={list.title}
-                    cards={list.cards}
-                    index={index}
-                  />
-                ))}
-                {provided.placeholder}
-                <ProjectActionButton list />
-              </div>
-              
-            </div>
+            <ListsContainer
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {lists.map((list, index) => (
+                <ProjectList
+                  listID={list.id}
+                  key={list.id}
+                  title={list.title}
+                  cards={list.cards}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+              <ProjectCreate list />
+            </ListsContainer>
           )}
         </Droppable>
       </DragDropContext>
     )
-  }
-}
-
-const styles = {
-  listsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginRight: 8
   }
 }
 

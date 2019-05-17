@@ -1,10 +1,10 @@
 import React from 'react'
 
 import ProjectCard from './ProjectCard'
-import ProjectActionButton from './ProjectActionButton'
+import ProjectCreate from './ProjectCreate'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-const ProjectList = ({ title, cards, listID, index }) => {
+const ProjectList = React.memo(({ title, cards, listID, index }) => {
   return (
     <Draggable draggableId={String(listID)} index={index}>
       {provided => (
@@ -27,10 +27,11 @@ const ProjectList = ({ title, cards, listID, index }) => {
                     text={card.text}
                     id={card.id}
                     index={index}
+                    listID={listID}
                   />
                 ))}
                 {provided.placeholder}
-                <ProjectActionButton listID={listID} />
+                <ProjectCreate listID={listID} />
               </div>
             )}
           </Droppable>
@@ -38,7 +39,7 @@ const ProjectList = ({ title, cards, listID, index }) => {
       )}
     </Draggable>
   )
-}
+})
 
 const styles = {
   container: {

@@ -1,69 +1,63 @@
-import React from 'react'
-import Textarea from 'react-textarea-autosize'
-import { Card, Button, Icon } from '@material-ui/core'
+import React from "react";
+import styled from "styled-components";
+import Icon from "@material-ui/core/Icon";
+import Textarea from "react-textarea-autosize";
+import Card from "@material-ui/core/Card";
 
-const ProjectForm = props => {
-  const { list, text = '', setText, actionBtnClicked, closeForm } = props
-  const placeholder = list ? 'enter list title' : 'enter card title'
-  const buttonTitle = 'save'
+const ProjectForm = React.memo(
+  ({ list, text = "", onChange, closeForm, children }) => {
+    const placeholder = list
+      ? "Enter list title..."
+      : "Enter a title for this card...";
 
-  const styles = {
-    formContainer: {
-      width: list ? '300px' : '100%',
-      marginBottom: '8px'
-    },
-    cardContainer: {
-      minHeight: '85px',
-      padding: '6px 8px 2px'
-    },
-    textArea: {
-      resize: 'none',
-      width: '100%',
-      overflow: 'hidden',
-      outline: 'none',
-      border: 'none'
-    },
-    buttonContainer: {
-      marginTop: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      marginLeft: '8px'
-    },
-    buttonStyle: {
-      color: 'white',
-      background: '#5aac44'
-    },
-    iconStyle: {
-      marginLeft: '8px',
-      cursor: 'pointer'
-    }
+    const Container = styled.div`
+      width: 300px;
+      margin-bottom: 8px;
+    `;
+
+    const StyledCard = styled(Card)`
+      min-height: 85px;
+      padding: 6px 8px 2px;
+    `;
+
+    const StyledTextArea = styled(Textarea)`
+      resize: none;
+      width: 100%;
+      overflow: hidden;
+      outline: none;
+      border: none;
+    `;
+
+    const ButtonContainer = styled.div`
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+    `;
+
+    const StyledIcon = styled(Icon)`
+      margin-left: 8px;
+      cursor: pointer;
+    `;
+
+    return (
+      <Container>
+        <StyledCard>
+          <StyledTextArea
+            placeholder={placeholder}
+            autoFocus
+            value={text}
+            onChange={e => onChange(e)}
+            onBlur={closeForm}
+          />
+        </StyledCard>
+        <ButtonContainer>
+          {children}
+          <StyledIcon onMouseDown={closeForm}>close</StyledIcon>
+        </ButtonContainer>
+      </Container>
+    );
   }
+);
 
-  return (
-    <div style={styles.formContainer}>
-      <Card style={styles.cardContainer}>
-        <Textarea
-          placeholder={placeholder}
-          autoFocus
-          value={text}
-          style={styles.textArea}
-          onBlur={closeForm}
-          onChange={e => setText(e.target.value)}
-        />
-      </Card>
-      <div style={styles.buttonContainer}>
-        <Button
-          variant="contained"
-          style={styles.buttonStyle}
-          children={buttonTitle}
-        />
-        >
-        <Icon onMouseDown={closeForm} style={styles.iconStyle}>
-          close
-        </Icon>
-      </div>
-    </div>
-  )
-}
-
-export default ProjectForm
+export default ProjectForm;

@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARD, DRAG_HAPPENED } from '../actions'
+import { ADD_LIST, ADD_CARD, DRAG_HAPPENED, EDIT_CARD } from '../actions'
 
 let listID = 2
 let cardID = 6
@@ -110,6 +110,21 @@ const listsReducer = (state = initialState, action) => {
         listEnd.cards.splice(droppableIndexEnd, 0, ...card)
       }
       return newState
+    case EDIT_CARD:
+      const { id, listId, newText } = action.payload
+      return state.map(list => {
+        if (list.id === listId) {
+          const newCards = list.cards.map(card => {
+            if (card.id === id) {
+              card.text = newText
+              return card
+            }
+            return card
+          })
+          return { ...list, cards: newCards }
+        }
+        return list
+      })
 
     default:
       return state

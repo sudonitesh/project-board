@@ -32,6 +32,7 @@ const StyledTitle = styled.h3`
 
 const TitleDiv = styled.div`
   position: relative;
+  text-align: center;
 `
 
 const DeleteButton = styled(Icon)`
@@ -95,35 +96,34 @@ const ProjectList = ({ title, cards, listID, index, dispatch }) => {
         >
           <Droppable droppableId={String(listID)} type="card">
             {provided => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={{ textAlign: 'center' }}
-              >
-                {isEditing ? (
-                  renderEditInput()
-                ) : (
-                  <TitleDiv>
-                    <StyledTitle onClick={() => setIsEditing(true)}>
-                      {listTitle}
-                    </StyledTitle>
-                    <DeleteButton onClick={handleDeleteList}>
-                      delete
-                    </DeleteButton>
-                  </TitleDiv>
-                )}
-
-                {cards.map((card, index) => (
-                  <ProjectCard
-                    key={card.id}
-                    text={card.text}
-                    id={card.id}
-                    index={index}
-                    listID={listID}
-                  />
-                ))}
-                {provided.placeholder}
-                <ProjectCreate listID={listID} />
+              <div>
+                <div>
+                  {isEditing ? (
+                    renderEditInput()
+                  ) : (
+                    <TitleDiv>
+                      <StyledTitle onClick={() => setIsEditing(true)}>
+                        {listTitle}
+                      </StyledTitle>
+                      <DeleteButton onClick={handleDeleteList}>
+                        delete
+                      </DeleteButton>
+                    </TitleDiv>
+                  )}
+                </div>
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {cards.map((card, index) => (
+                    <ProjectCard
+                      key={card.id}
+                      text={card.text}
+                      id={card.id}
+                      index={index}
+                      listID={listID}
+                    />
+                  ))}
+                  {provided.placeholder}
+                  <ProjectCreate listID={listID} />
+                </div>
               </div>
             )}
           </Droppable>

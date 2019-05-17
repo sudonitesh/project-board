@@ -27,11 +27,19 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 8px;
+  position: relative;
 `
 
 const StyledIcon = styled(Icon)`
-  margin-left: 8px;
+  margin-right: 8px;
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  &:hover{
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
 `
 const ProjectForm = React.memo(
   ({ list, text = '', onChange, closeForm, children }) => {

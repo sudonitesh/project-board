@@ -44,11 +44,11 @@ class App extends PureComponent {
     }),
     sunIcon: {
       color: '#fadf0f',
-      fontSize: "25px"
+      fontSize: '25px'
     },
     moonIcon: {
       color: '#fff',
-      fontSize: "20px"
+      fontSize: '20px'
     }
   }
 
@@ -62,11 +62,11 @@ class App extends PureComponent {
           }),
           sunIcon: {
             color: '#fff',
-            fontSize: "20px"
+            fontSize: '20px'
           },
           moonIcon: {
             color: '#fadf0f',
-            fontSize: "25px"
+            fontSize: '25px'
           }
         })
       } else {
@@ -77,11 +77,11 @@ class App extends PureComponent {
           }),
           sunIcon: {
             color: '#fadf0f',
-            fontSize: "25px"
+            fontSize: '25px'
           },
           moonIcon: {
             color: '#fff',
-            fontSize: "20px"
+            fontSize: '20px'
           }
         })
       }
@@ -106,9 +106,9 @@ class App extends PureComponent {
       )
     )
   }
-  
+
   render() {
-    const { lists } = this.props
+    const { lists, listOrder, cards } = this.props
     return (
       <MuiThemeProvider theme={this.state.theme}>
         <CssBaseline />
@@ -123,21 +123,25 @@ class App extends PureComponent {
               <Typography variant="h6" color="inherit" style={styles.grow}>
                 Project Board
               </Typography>
-              <span style={{marginRight: "10px"}}><i style={this.state.sunIcon} className="far fa-sun"></i></span>
+              <span style={{ marginRight: '10px' }}>
+                <i style={this.state.sunIcon} className="far fa-sun" />
+              </span>
               <Switch
                 onChange={this.handleThemeChange}
                 checked={this.state.ThemeChecked}
                 handleDiameter={22}
                 offColor="#585858" // fadf0f
-                onColor="#585858"  // 545DBC
+                onColor="#585858" // 545DBC
                 offHandleColor="#fce903" // 3F51B5
-                onHandleColor="#fce903"  // 272727
+                onHandleColor="#fce903" // 272727
                 height={32}
                 width={60}
                 uncheckedIcon={false}
                 checkedIcon={false}
               />
-              <span style={{marginLeft: "10px"}}><i style={this.state.moonIcon} className="far fa-moon"></i></span>
+              <span style={{ marginLeft: '10px' }}>
+                <i style={this.state.moonIcon} className="far fa-moon" />
+              </span>
             </Toolbar>
           </AppBar>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -152,15 +156,22 @@ class App extends PureComponent {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {lists.map((list, index) => (
-                    <ProjectList
-                      listID={list.id}
-                      key={list.id}
-                      title={list.title}
-                      cards={list.cards}
-                      index={index}
-                    />
-                  ))}
+                  {listOrder.map((listID, index) => {
+                    const list = lists[listID]
+                    if (list) {
+                      const listCards = list.cards.map(cardID => cards[cardID])
+
+                      return (
+                        <ProjectList
+                          listID={list.id}
+                          key={list.id}
+                          title={list.title}
+                          cards={listCards}
+                          index={index}
+                        />
+                      )
+                    }
+                  })}
                   {provided.placeholder}
                   <ProjectCreate list />
                 </ListsContainer>
@@ -174,7 +185,9 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  lists: state.lists
+  lists: state.lists,
+  listOrder: state.listOrder,
+  cards: state.cards
 })
 
 export default connect(mapStateToProps)(App)

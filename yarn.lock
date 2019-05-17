@@ -8434,6 +8434,20 @@ react-beautiful-dnd@^11.0.3:
     tiny-invariant "^1.0.4"
     use-memo-one "^1.1.0"
 
+react-css-vars@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-css-vars/-/react-css-vars-1.2.1.tgz#b6cf62510fa4df0b51079633c2ba00204c5d29c9"
+  integrity sha512-vS5h2so/BEJlVznj2twsQyKUah7NPtJR8BCIfzAM0z2QmU+1u5BrvfiL2LVCtm1rEKFvXzH49tcG261XHjgiSw==
+
+react-dark-theme@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-dark-theme/-/react-dark-theme-1.1.1.tgz#b60be1245182f44b5144d085b78a18bd6dc1af05"
+  integrity sha512-p4cTzaQCqYryGKtIi+P//0wMnNGA0WgrhkzkLnTj7xOS1SjbDiMwJCGQS57tc6cCQ17SxNIkJa2Py1KUaqIXnA==
+  dependencies:
+    prop-types "^15.7.2"
+    react-css-vars "^1.2.1"
+    react-toggle "^4.0.2"
+
 react-dev-utils@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.0.1.tgz#5c03d85a0b2537d0c46af7165c24a7dfb274bef2"
@@ -8600,6 +8614,13 @@ react-scripts@3.0.1:
   optionalDependencies:
     fsevents "2.0.6"
 
+react-switch@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-5.0.0.tgz#ecbb666f8789cb8138b3ba1160bc3745390ab502"
+  integrity sha512-+zxY9xj9dMc8Y4gv/kkqQrirfEiIQ+SlQfJDW1Wi81L3xoh1fcbBYyJyh0TnhM/U/b6HxuBmkmU4Ooxgtuoavw==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-textarea-autosize@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-7.1.0.tgz#3132cb77e65d94417558d37c0bfe415a5afd3445"
@@ -8607,6 +8628,18 @@ react-textarea-autosize@^7.1.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
+
+react-toggle-switch@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-toggle-switch/-/react-toggle-switch-3.0.4.tgz#87e516e2bbc421ce4998b8eb28b29457db180724"
+  integrity sha512-eM2Izl0qNrdFZlmRwpXPpUjaYVISHVy8dxCN9l6eRZ7KpmrDsIGInDpoSRU2QPs596+Al+udOArdXX5wCRg0Gg==
+
+react-toggle@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-toggle/-/react-toggle-4.0.2.tgz#77f487860efb87fafd197672a2db8c885be1440f"
+  integrity sha512-EPTWnN7gQHgEAUEmjheanZXNzY5TPnQeyyHfEs3YshaiWZf5WNjfYDrglO5F1Hl/dNveX18i4l0grTEsYH2Ccw==
+  dependencies:
+    classnames "^2.2.5"
 
 react-transition-group@^2.2.1:
   version "2.9.0"

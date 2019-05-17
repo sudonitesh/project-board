@@ -39,7 +39,7 @@ const ProjectForm = React.memo(
       ? 'Enter list title...'
       : 'Enter a title for this card...'
     return (
-      <Container>
+      <Container style={{minWidth: "300px"}}>
         <StyledCard>
           <StyledTextArea
             placeholder={placeholder}

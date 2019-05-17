@@ -30,7 +30,6 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
     }
     &:active {
       box-shadow: none!important;
-      background-color: white;
     }
   `
   const StyledTypography = styled(Typography)`
@@ -51,7 +50,6 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
     }
     &:hover {
       opacity: 0.8;
-      color: #191970;
     }
   `
 

@@ -6,14 +6,99 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import { sort } from '../actions'
 
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { CssBaseline } from '@material-ui/core'
+import Switch from 'react-switch'
+
+require('./App.css')
+
 const ListsContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
 
-// TODO: Fix performance issue
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
+}
 
+// TODO: Fix performance issue
+let theme = createMuiTheme({
+  palette: {
+    // type: this.typeOfTheme
+    type: 'dark'
+    // type: this.state.ThemeChecked ? 'dark' : 'light'
+  },
+  typography: { useNextVariants: true }
+})
 class App extends PureComponent {
+  state = {
+    ThemeChecked: false,
+    theme: createMuiTheme({
+      palette: { type: 'light' },
+      typography: { useNextVariants: true }
+    }),
+    sunIcon: {
+      color: '#fadf0f',
+      fontSize: "25px"
+    },
+    moonIcon: {
+      color: '#fff',
+      fontSize: "20px",
+      color: "#fff"
+    }
+  }
+
+  handleThemeChange = () => {
+    this.setState({ ThemeChecked: !this.state.ThemeChecked }, () => {
+      console.log(this.state)
+      if (this.state.ThemeChecked) {
+        this.setState({
+          theme: createMuiTheme({
+            palette: { type: 'dark' },
+            typography: { useNextVariants: true }
+          }),
+          sunIcon: {
+            color: '#fff',
+            fontSize: "20px"
+          },
+          moonIcon: {
+            color: '#fadf0f',
+            fontSize: "25px"
+          }
+        })
+      } else {
+        this.setState({
+          theme: createMuiTheme({
+            palette: { type: 'light' },
+            typography: { useNextVariants: true }
+          }),
+          sunIcon: {
+            color: '#fadf0f',
+            fontSize: "25px"
+          },
+          moonIcon: {
+            color: '#fff',
+            fontSize: "20px"
+          }
+        })
+      }
+    })
+  }
+
   onDragEnd = result => {
     const { destination, source, draggableId, type } = result
 
@@ -32,32 +117,69 @@ class App extends PureComponent {
       )
     )
   }
-
+  
   render() {
     const { lists } = this.props
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="all-lists" direction="horizontal" type="list">
-          {provided => (
-            <ListsContainer
-              {...provided.droppableProps}
-              ref={provided.innerRef}
+      <MuiThemeProvider theme={this.state.theme}>
+        <CssBaseline />
+        <div>
+          <AppBar position="static" style={{ marginBottom: '10px' }}>
+            <Toolbar>
+              <IconButton
+                style={styles.menuButton}
+                color="inherit"
+                aria-label="Menu"
+              />
+              <Typography variant="h6" color="inherit" style={styles.grow}>
+                Project Board
+              </Typography>
+              <span style={{marginRight: "10px"}}><i style={this.state.sunIcon} class="far fa-sun"></i></span>
+              <Switch
+                onChange={this.handleThemeChange}
+                checked={this.state.ThemeChecked}
+                handleDiameter={22}
+                offColor="#585858" // fadf0f
+                onColor="#585858"  // 545DBC
+                offHandleColor="#fce903" // 3F51B5
+                onHandleColor="#fce903"  // 272727
+                height={32}
+                width={60}
+                uncheckedIcon={false}
+                checkedIcon={false}
+              />
+              <span style={{marginLeft: "10px"}}><i style={this.state.moonIcon} class="far fa-moon"></i></span>
+            </Toolbar>
+          </AppBar>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Droppable
+              droppableId="all-lists"
+              direction="horizontal"
+              type="list"
             >
-              {lists.map((list, index) => (
-                <ProjectList
-                  listID={list.id}
-                  key={list.id}
-                  title={list.title}
-                  cards={list.cards}
-                  index={index}
-                />
-              ))}
-              {provided.placeholder}
-              <ProjectCreate list />
-            </ListsContainer>
-          )}
-        </Droppable>
-      </DragDropContext>
+              {provided => (
+                <ListsContainer
+                  style={{ margin: '25px' }}
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {lists.map((list, index) => (
+                    <ProjectList
+                      listID={list.id}
+                      key={list.id}
+                      title={list.title}
+                      cards={list.cards}
+                      index={index}
+                    />
+                  ))}
+                  {provided.placeholder}
+                  <ProjectCreate list />
+                </ListsContainer>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

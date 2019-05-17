@@ -72,7 +72,7 @@ class ProjectCreate extends React.PureComponent {
       border-radius: 3px;
       height: 36px;
       margin-left: 8px;
-      width: 300px;
+      width: 30px;
       padding-left: 10px;
       padding-right: 10px;
       opacity: ${buttonTextOpacity};

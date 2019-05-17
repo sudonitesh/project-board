@@ -1,4 +1,4 @@
-import { ADD_CARD, EDIT_CARD } from './types'
+import { ADD_CARD, EDIT_CARD, DELETE_CARD } from './types'
 
 export const addCard = (listID, text) => {
   return {
@@ -7,9 +7,16 @@ export const addCard = (listID, text) => {
   }
 }
 
-export const editCard = (id, listId, newText) => {
+export const editCard = (id, listID, newText) => {
   return {
     type: EDIT_CARD,
-    payload: {id, listId, newText}
+    payload: {id, listID, newText}
+  }
+}
+
+export const deleteCard = (id, listID) => {
+  return {
+    type: DELETE_CARD,
+    payload: {id, listID}
   }
 }

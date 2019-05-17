@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
-import CardContent from "@material-ui/core/CardContent";
-import { Draggable } from "react-beautiful-dnd";
-import styled from "styled-components";
-import Icon from "@material-ui/core/Icon";
-import ProjectForm from "./ProjectForm";
-import { editCard } from "../actions";
-import { connect } from "react-redux";
-import ProjectButton from "./ProjectButton";
+import React, { useState } from 'react'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
+import CardContent from '@material-ui/core/CardContent'
+import { Draggable } from 'react-beautiful-dnd'
+import styled from 'styled-components'
+import Icon from '@material-ui/core/Icon'
+import { connect } from 'react-redux'
+import ProjectForm from './ProjectForm'
+import { editCard, deleteCard } from '../actions'
+import ProjectButton from './ProjectButton'
 
 const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [cardText, setText] = useState(text);
+  const [isEditing, setIsEditing] = useState(false)
+  const [cardText, setText] = useState(text)
 
   const CardContainer = styled.div`
     margin: 0 0 8px 0;
     position: relative;
     max-width: 100%;
     word-wrap: break-word;
-  `;
+  `
 
   const EditButton = styled(Icon)`
     position: absolute;
@@ -33,31 +33,56 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
     }
     &:hover {
       opacity: 0.8;
+      color: #191970;
     }
-  `;
+  `
+
+  const DeleteButton = styled(Icon)`
+    position : absolute;
+    display: none;
+    right: 5px;
+    bottom: 5px;
+    opacity: 0.5;
+    ${CardContainer}:hover & {
+      display: block;
+      cursor: pointer;
+    }
+    &:hover {
+      opacity : 0.8;
+      color:red;
+    }
+  `
 
   const closeForm = e => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleChange = e => {
-    setText(e.target.value);
-  };
+    setText(e.target.value)
+  }
+
+  const handledeleteCard = e => {
+    dispatch(deleteCard(id, listID))
+  }
 
   const saveCard = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    dispatch(editCard(id, listID, cardText));
-    setIsEditing(false);
-  };
+    dispatch(editCard(id, listID, cardText))
+    setIsEditing(false)
+  }
 
   const renderEditForm = () => {
     return (
-      <ProjectForm text={cardText} onChange={handleChange} closeForm={closeForm}>
+      <ProjectForm
+        text={cardText}
+        onChange={handleChange}
+        closeForm={closeForm}
+      >
         <ProjectButton onClick={saveCard}>Save</ProjectButton>
       </ProjectForm>
-    );
-  };
+    )
+  }
 
   const renderCard = () => {
     return (
@@ -76,6 +101,9 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
               >
                 edit
               </EditButton>
+              <DeleteButton fontSize="small" onMouseDown={handledeleteCard}>
+                delete
+              </DeleteButton>
               <CardContent>
                 <Typography>{text}</Typography>
               </CardContent>
@@ -83,10 +111,10 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
           </CardContainer>
         )}
       </Draggable>
-    );
-  };
+    )
+  }
 
-  return isEditing ? renderEditForm() : renderCard();
-});
+  return isEditing ? renderEditForm() : renderCard()
+})
 
-export default connect()(ProjectCard);
+export default connect()(ProjectCard)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { editTitle, deleteList } from '../actions'
 import ProjectCard from './ProjectCard'
@@ -30,13 +30,6 @@ const StyledTitle = styled.h3`
   }
 `
 
-const TitleContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`
 const TitleDiv = styled.div`
   position: relative;
 `

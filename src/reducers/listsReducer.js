@@ -67,9 +67,6 @@ const listsReducer = (state = initialState, action) => {
         id: `card-${cardID}`
       }
       cardID += 1
-
-      console.log('action received', action)
-
       const newState = state.map(list => {
         if (list.id === action.payload.listID) {
           return {
@@ -89,7 +86,6 @@ const listsReducer = (state = initialState, action) => {
         droppableIdEnd,
         droppableIndexEnd,
         droppableIndexStart,
-        draggableId,
         type
       } = action.payload
 
@@ -147,10 +143,10 @@ const listsReducer = (state = initialState, action) => {
       })
     }
     case EDIT_LIST_TITLE: {
-      const { listID, newListTitle } = action.payload
+      const { listID, newTitle } = action.payload
       return state.map(list => {
         if (list.id === listID) {
-          list.title = newListTitle
+          list.title = newTitle
           return list
         }
         return list

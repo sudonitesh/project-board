@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import ProjectList from './ProjectList'
 import { connect } from 'react-redux'
 import ProjectCreate from './ProjectCreate'
@@ -35,15 +35,6 @@ const styles = {
   }
 }
 
-// TODO: Fix performance issue
-let theme = createMuiTheme({
-  palette: {
-    // type: this.typeOfTheme
-    type: 'dark'
-    // type: this.state.ThemeChecked ? 'dark' : 'light'
-  },
-  typography: { useNextVariants: true }
-})
 class App extends PureComponent {
   state = {
     ThemeChecked: false,
@@ -57,14 +48,12 @@ class App extends PureComponent {
     },
     moonIcon: {
       color: '#fff',
-      fontSize: "20px",
-      color: "#fff"
+      fontSize: "20px"
     }
   }
 
   handleThemeChange = () => {
     this.setState({ ThemeChecked: !this.state.ThemeChecked }, () => {
-      console.log(this.state)
       if (this.state.ThemeChecked) {
         this.setState({
           theme: createMuiTheme({
@@ -134,7 +123,7 @@ class App extends PureComponent {
               <Typography variant="h6" color="inherit" style={styles.grow}>
                 Project Board
               </Typography>
-              <span style={{marginRight: "10px"}}><i style={this.state.sunIcon} class="far fa-sun"></i></span>
+              <span style={{marginRight: "10px"}}><i style={this.state.sunIcon} className="far fa-sun"></i></span>
               <Switch
                 onChange={this.handleThemeChange}
                 checked={this.state.ThemeChecked}
@@ -148,7 +137,7 @@ class App extends PureComponent {
                 uncheckedIcon={false}
                 checkedIcon={false}
               />
-              <span style={{marginLeft: "10px"}}><i style={this.state.moonIcon} class="far fa-moon"></i></span>
+              <span style={{marginLeft: "10px"}}><i style={this.state.moonIcon} className="far fa-moon"></i></span>
             </Toolbar>
           </AppBar>
           <DragDropContext onDragEnd={this.onDragEnd}>

@@ -1,4 +1,61 @@
 body {
-  padding: 10px;
+  padding: 70px 10px;
+  width: 100%;
   margin: -10px -10px 10px -10px !important;
+}
+
+.wrapper-button {
+  position: absolute;
+  left: 165px;
+  width: 160px;
+  height: 50px;
+  margin-top: -20px;
+  margin-left: -130px;
+}
+.button {
+  position: absolute;
+  text-align: center;
+  line-height: 42px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 25px;
+}
+span.coracao {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  opacity: 0.3;
+}
+.wrapper-button:hover span.coracao {
+  animation: heart 0.8s infinite;
+}
+.wrapper-button:hover span.coracao.dois {
+  right: 20px;
+  animation-duration: 1s;
+  animation-delay: 0.2s;
+}
+@-moz-keyframes heart {
+  100% {
+    transform: translate(40px, -30px) rotate(15deg) scale(2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes heart {
+  100% {
+    transform: translate(40px, -30px) rotate(15deg) scale(2);
+    opacity: 0;
+  }
+}
+@-o-keyframes heart {
+  100% {
+    transform: translate(40px, -30px) rotate(15deg) scale(2);
+    opacity: 0;
+  }
+}
+@keyframes heart {
+  100% {
+    transform: translate(40px, -30px) rotate(15deg) scale(2);
+    opacity: 0;
+  }
 }

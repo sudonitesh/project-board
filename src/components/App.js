@@ -113,7 +113,7 @@ class App extends PureComponent {
       <MuiThemeProvider theme={this.state.theme}>
         <CssBaseline />
         <div>
-          <AppBar position="static" style={{ marginBottom: '10px' }}>
+          <AppBar position="fixed" style={{ marginBottom: '10px' }}>
             <Toolbar>
               <IconButton
                 style={styles.menuButton}
@@ -121,7 +121,11 @@ class App extends PureComponent {
                 aria-label="Menu"
               />
               <Typography variant="h6" color="inherit" style={styles.grow}>
-                Project Board
+              <div className="wrapper-button">
+                <span className="coracao um">♥</span>
+                <span className="coracao dois">♥</span>
+                <div className="button">Project Board</div>
+              </div>
               </Typography>
               <span style={{ marginRight: '10px' }}>
                 <i style={this.state.sunIcon} className="far fa-sun" />

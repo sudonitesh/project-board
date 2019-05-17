@@ -20,7 +20,25 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
     max-width: 100%;
     word-wrap: break-word;
   `
-
+  const StyledCard = styled(Card)`
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    &:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+    &:active {
+      box-shadow: none!important;
+      background-color: white;
+    }
+  `
+  const StyledTypography = styled(Typography)`
+    display: inline-block!important;
+    cursor: pointer;
+    padding-right: 13px;
+  `
+  
   const EditButton = styled(Icon)`
     position: absolute;
     display: none;
@@ -38,7 +56,7 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
   `
 
   const DeleteButton = styled(Icon)`
-    position : absolute;
+    position: absolute;
     display: none;
     right: 5px;
     bottom: 5px;
@@ -48,8 +66,8 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
       cursor: pointer;
     }
     &:hover {
-      opacity : 0.8;
-      color:red;
+      opacity: 0.8;
+      color: red;
     }
   `
 
@@ -92,9 +110,8 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            onDoubleClick={() => setIsEditing(true)}
           >
-            <Card>
+            <StyledCard>
               <EditButton
                 onMouseDown={() => setIsEditing(true)}
                 fontSize="small"
@@ -105,9 +122,9 @@ const ProjectCard = React.memo(({ text, id, listID, index, dispatch }) => {
                 delete
               </DeleteButton>
               <CardContent>
-                <Typography>{text}</Typography>
+                <StyledTypography onClick={() => setIsEditing(true)}>{text}</StyledTypography>
               </CardContent>
-            </Card>
+            </StyledCard>
           </CardContainer>
         )}
       </Draggable>

@@ -1,4 +1,4 @@
-import { ADD_LIST, DRAG_HAPPENED } from './types'
+import { ADD_LIST, DRAG_HAPPENED, EDIT_LIST_TITLE } from './types'
 
 export const addList = title => {
   return {
@@ -24,6 +24,16 @@ export const sort = (
       droppableIndexStart,
       draggableId,
       type
+    }
+  }
+}
+
+export const editTitle = (listID, newTitle) => {
+  return {
+    type: EDIT_LIST_TITLE,
+    payload: {
+      listID,
+      newTitle
     }
   }
 }

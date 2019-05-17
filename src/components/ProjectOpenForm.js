@@ -20,7 +20,12 @@ const ProjectOpenForm = ({ list, children, onClick }) => {
     opacity: ${buttonTextOpacity};
     color: ${buttonTextColor};
     background-color: ${buttonTextBackground};
+    &:hover{
+      color: #006400;
+      font-weight: bold;
+    }
   `
+
 
   return (
     <OpenFormButton onClick={onClick}>

@@ -3,7 +3,8 @@ import {
   ADD_CARD,
   DRAG_HAPPENED,
   EDIT_CARD,
-  DELETE_CARD
+  DELETE_CARD,
+  EDIT_LIST_TITLE
 } from '../actions'
 
 let listID = 2
@@ -16,7 +17,7 @@ const initialState = [
     cards: [
       {
         id: `card-${0}`,
-        text: 'card 0'
+        text: 'card 0 dsgrefs grflskvghjsfkd vnjksdbvjk sfdvjkbjisd vjkwdsbv cjkds vbjksdvjkdsfbvijds vjkxsdjk '
       },
       {
         id: `card-${1}`,
@@ -142,6 +143,16 @@ const listsReducer = (state = initialState, action) => {
         } else {
           return list
         }
+      })
+    }
+    case EDIT_LIST_TITLE: {
+      const { listID, newListTitle } = action.payload
+      return state.map(list => {
+        if (list.id === listID) {
+          list.title = newListTitle
+          return list
+        }
+        return list
       })
     }
     default:

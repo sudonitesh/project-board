@@ -1,4 +1,4 @@
-import { ADD_LIST, DRAG_HAPPENED, EDIT_LIST_TITLE } from './types'
+import { ADD_LIST, DRAG_HAPPENED, EDIT_LIST_TITLE, DELETE_LIST } from './types'
 
 export const addList = title => {
   return {
@@ -34,6 +34,15 @@ export const editTitle = (listID, newTitle) => {
     payload: {
       listID,
       newTitle
+    }
+  }
+}
+
+export const deleteList = (listID) => {
+  return {
+    type: DELETE_LIST,
+    payload: {
+      listID
     }
   }
 }

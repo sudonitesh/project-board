@@ -4,7 +4,8 @@ import {
   DRAG_HAPPENED,
   EDIT_CARD,
   DELETE_CARD,
-  EDIT_LIST_TITLE
+  EDIT_LIST_TITLE,
+  DELETE_LIST
 } from '../actions'
 
 let listID = 2
@@ -154,6 +155,10 @@ const listsReducer = (state = initialState, action) => {
         }
         return list
       })
+    }
+    case DELETE_LIST: {
+      const {listID} = action.payload
+      return state.filter(list => list.id !== listID)
     }
     default:
       return state

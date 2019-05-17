@@ -37,7 +37,6 @@ class App extends PureComponent {
     const { lists } = this.props
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <h2>Hello Youtube</h2>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {provided => (
             <ListsContainer

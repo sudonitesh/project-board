@@ -12,7 +12,7 @@ const Container = styled.div`
 const StyledCard = styled(Card)`
   min-height: 85px;
   padding: 6px 8px 2px;
-  min-width: 300px;
+  width: 285px;
 `
 
 const StyledTextArea = styled(Textarea)`

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-
+import $ from 'jquery'
 import * as serviceWorker from './serviceWorker'
 import App from './components/App'
 import Store from './store'
@@ -18,10 +18,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-// import $ from 'jquery'
-// $(document).bind('DOMNodeRemoved', function(e) {
-//   console.log('Removed: ' + e.target.nodeName)
-// })
+$(document).bind('DOMNodeRemoved', function(e) {
+  console.log('Removed: ' + e.target.nodeName)
+})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

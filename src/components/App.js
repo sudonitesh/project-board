@@ -124,7 +124,7 @@ class App extends PureComponent {
               <div className="wrapper-button">
                 <span className="coracao um">♥</span>
                 <span className="coracao dois">♥</span>
-                <div className="button">Project Board</div>
+                <div className="button noselect">Project Board</div>
               </div>
               </Typography>
               <span style={{ marginRight: '10px' }}>

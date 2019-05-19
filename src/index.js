@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import $ from 'jquery'
 
 import * as serviceWorker from './serviceWorker'
 import App from './components/App'
@@ -19,6 +18,7 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
+// import $ from 'jquery'
 // $(document).bind('DOMNodeRemoved', function(e) {
 //   console.log('Removed: ' + e.target.nodeName)
 // })

@@ -4,31 +4,36 @@ import {
   DRAG_HAPPENED,
   DELETE_CARD,
   EDIT_LIST_TITLE,
-  DELETE_LIST
+  DELETE_LIST,
 } from '../actions'
 
-let listID = 0
-let cardID = 0
-
-const initialState = {}
+const initialState = {
+  'list-0': {
+    id: 'list-0',
+    cards: ['card-0'],
+    title: 'First List',
+  },
+}
 
 const listsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_LIST: {
+      const { title, id } = action.payload
+
       const newList = {
-        title: action.payload,
+        title: title,
         cards: [],
-        id: `list-${listID}`
+        id: `list-${id}`,
       }
-      const newState = { ...state, [`list-${listID}`]: newList }
-      listID += 1
+
+      const newState = { ...state, [`list-${id}`]: newList }
+
       return newState
     }
     case ADD_CARD: {
-      cardID += 1
-      const { listID } = action.payload
+      const { listID, id } = action.payload
       const list = state[listID]
-      list.cards.push(`card-${cardID}`)
+      list.cards.push(`card-${id}`)
       return { ...state, [listID]: list }
     }
 
@@ -38,10 +43,9 @@ const listsReducer = (state = initialState, action) => {
         droppableIdEnd,
         droppableIndexEnd,
         droppableIndexStart,
-        type
+        type,
       } = action.payload
 
-      // draggin lists around - the listOrderReducer should handle this
       if (type === 'list') {
         return state
       }
@@ -68,7 +72,7 @@ const listsReducer = (state = initialState, action) => {
         return {
           ...state,
           [droppableIdStart]: listStart,
-          [droppableIdEnd]: listEnd
+          [droppableIdEnd]: listEnd,
         }
       }
       return state

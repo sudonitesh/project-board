@@ -36,7 +36,7 @@ const StyledIcon = styled(Icon)`
   cursor: pointer;
   position: absolute;
   right: 0;
-  &:hover{
+  &:hover {
     border-radius: 50%;
     background: red;
     color: white;
@@ -48,7 +48,7 @@ const ProjectForm = React.memo(
       ? 'Enter list title...'
       : 'Enter a title for this card...'
     return (
-      <Container style={{maxWidth: "284px"}}>
+      <Container style={{ maxWidth: '284px' }}>
         <StyledCard>
           <StyledTextArea
             placeholder={placeholder}
@@ -64,7 +64,7 @@ const ProjectForm = React.memo(
         </ButtonContainer>
       </Container>
     )
-  }
+  },
 )
 
 export default ProjectForm

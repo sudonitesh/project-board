@@ -1,13 +1,12 @@
 import { ADD_LIST, DRAG_HAPPENED, DELETE_LIST } from '../actions'
-let listID = 0
 const initialState = ['list-0']
 
 const listOrderReducer = (state = initialState, action) => {
-  console.log('listorder', state)
+
   switch (action.type) {
     case ADD_LIST: {
-      listID += 1
-      const newID = `list-${listID}`
+      const { id } = action.payload
+      const newID = `list-${id}`
       return [...state, newID]
     }
     case DRAG_HAPPENED: {
@@ -15,7 +14,7 @@ const listOrderReducer = (state = initialState, action) => {
         droppableIndexEnd,
         droppableIndexStart,
 
-        type
+        type,
       } = action.payload
       const newState = state
 

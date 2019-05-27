@@ -1,69 +1,69 @@
-import React from "react";
-import Icon from "@material-ui/core/Icon";
-import ProjectButton from "./ProjectButton";
-import { connect } from "react-redux";
-import { addList, addCard } from "../actions";
-import styled from "styled-components";
-import ProjectForm from "./ProjectForm";
-import ProjectOpenForm from "./ProjectOpenForm";
+import React from 'react'
+import Icon from '@material-ui/core/Icon'
+import ProjectButton from './ProjectButton'
+import { connect } from 'react-redux'
+import { addList, addCard } from '../actions'
+import styled from 'styled-components'
+import ProjectForm from './ProjectForm'
+import ProjectOpenForm from './ProjectOpenForm'
 
 class ProjectCreate extends React.PureComponent {
   state = {
     formOpen: false,
-    text: ""
-  };
+    text: '',
+  }
 
   openForm = () => {
     this.setState({
-      formOpen: true
-    });
-  };
+      formOpen: true,
+    })
+  }
 
   closeForm = e => {
     this.setState({
-      formOpen: false
-    });
-  };
+      formOpen: false,
+    })
+  }
 
   handleInputChange = e => {
     this.setState({
-      text: e.target.value
-    });
-  };
+      text: e.target.value,
+    })
+  }
 
   handleAddList = () => {
-    const { dispatch } = this.props;
-    const { text } = this.state;
+    const { dispatch } = this.props
+    const { text } = this.state
 
     if (text) {
       this.setState({
-        text: ""
-      });
-      dispatch(addList(text));
+        text: '',
+      })
+      dispatch(addList(text))
     }
 
-    return;
-  };
+    return
+  }
 
   handleAddCard = () => {
-    const { dispatch, listID } = this.props;
-    const { text } = this.state;
+    const { dispatch, listID } = this.props
+    const { text } = this.state
 
     if (text) {
       this.setState({
-        text: ""
-      });
-      dispatch(addCard(listID, text));
+        text: '',
+      })
+      dispatch(addCard(listID, text))
     }
-  };
+  }
 
   renderOpenForm = () => {
-    const { list } = this.props;
+    const { list } = this.props
 
-    const buttonText = list ? "Add another list" : "Add another card";
-    const buttonTextOpacity = list ? 1 : 0.5;
-    const buttonTextColor = list ? "white" : "inherit";
-    const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
+    const buttonText = list ? 'Add another list' : 'Add another card'
+    const buttonTextOpacity = list ? 1 : 0.5
+    const buttonTextColor = list ? 'white' : 'inherit'
+    const buttonTextBackground = list ? 'rgba(0,0,0,.15)' : 'inherit'
 
     const OpenFormButton = styled.div`
       display: flex;
@@ -78,19 +78,19 @@ class ProjectCreate extends React.PureComponent {
       opacity: ${buttonTextOpacity};
       color: ${buttonTextColor};
       background-color: ${buttonTextBackground};
-    `;
+    `
 
     return (
       <OpenFormButton onClick={this.openForm}>
         <Icon>add</Icon>
         <p style={{ flexShrink: 0 }}>{buttonText}</p>
       </OpenFormButton>
-    );
-  };
+    )
+  }
 
   render() {
-    const { text } = this.state;
-    const { list } = this.props;
+    const { text } = this.state
+    const { list } = this.props
     return this.state.formOpen ? (
       <ProjectForm
         text={text}
@@ -98,15 +98,15 @@ class ProjectCreate extends React.PureComponent {
         closeForm={this.closeForm}
       >
         <ProjectButton onClick={list ? this.handleAddList : this.handleAddCard}>
-          {list ? "Add List" : "Add Card"}
+          {list ? 'Add List' : 'Add Card'}
         </ProjectButton>
       </ProjectForm>
     ) : (
       <ProjectOpenForm list={list} onClick={this.openForm}>
-        {list ? "Add another list" : "Add another card"}
+        {list ? 'Add another list' : 'Add another card'}
       </ProjectOpenForm>
-    );
+    )
   }
 }
 
-export default connect()(ProjectCreate);
+export default connect()(ProjectCreate)

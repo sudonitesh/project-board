@@ -1,9 +1,11 @@
 import { ADD_LIST, DRAG_HAPPENED, EDIT_LIST_TITLE, DELETE_LIST } from './types'
+import uuid from 'uuidv4'
 
 export const addList = title => {
+  const id = uuid()
   return {
     type: ADD_LIST,
-    payload: title
+    payload: { title, id },
   }
 }
 
@@ -13,7 +15,7 @@ export const sort = (
   droppableIndexStart,
   droppableIndexEnd,
   draggableId,
-  type
+  type,
 ) => {
   return {
     type: DRAG_HAPPENED,
@@ -23,8 +25,8 @@ export const sort = (
       droppableIndexEnd,
       droppableIndexStart,
       draggableId,
-      type
-    }
+      type,
+    },
   }
 }
 
@@ -33,16 +35,16 @@ export const editTitle = (listID, newTitle) => {
     type: EDIT_LIST_TITLE,
     payload: {
       listID,
-      newTitle
-    }
+      newTitle,
+    },
   }
 }
 
-export const deleteList = (listID) => {
+export const deleteList = listID => {
   return {
     type: DELETE_LIST,
     payload: {
-      listID
-    }
+      listID,
+    },
   }
 }

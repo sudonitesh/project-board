@@ -15,11 +15,11 @@ ReactDOM.render(
       <App />
     </PersistGate>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 
 $(document).bind('DOMNodeRemoved', function(e) {
-  console.log('Removed: ' + e.target.nodeName)
+  // console.log('Removed: ' + e.target.nodeName)
 })
 
 // If you want your app to work offline and load faster, you can change

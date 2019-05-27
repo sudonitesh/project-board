@@ -24,15 +24,15 @@ const ListsContainer = styled.div`
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
-  }
+    marginRight: 20,
+  },
 }
 
 class App extends PureComponent {
@@ -40,16 +40,16 @@ class App extends PureComponent {
     ThemeChecked: false,
     theme: createMuiTheme({
       palette: { type: 'light' },
-      typography: { useNextVariants: true }
+      typography: { useNextVariants: true },
     }),
     sunIcon: {
       color: '#fadf0f',
-      fontSize: '25px'
+      fontSize: '25px',
     },
     moonIcon: {
       color: '#fff',
-      fontSize: '20px'
-    }
+      fontSize: '20px',
+    },
   }
 
   handleThemeChange = () => {
@@ -58,31 +58,31 @@ class App extends PureComponent {
         this.setState({
           theme: createMuiTheme({
             palette: { type: 'dark' },
-            typography: { useNextVariants: true }
+            typography: { useNextVariants: true },
           }),
           sunIcon: {
             color: '#fff',
-            fontSize: '20px'
+            fontSize: '20px',
           },
           moonIcon: {
             color: '#fadf0f',
-            fontSize: '25px'
-          }
+            fontSize: '25px',
+          },
         })
       } else {
         this.setState({
           theme: createMuiTheme({
             palette: { type: 'light' },
-            typography: { useNextVariants: true }
+            typography: { useNextVariants: true },
           }),
           sunIcon: {
             color: '#fadf0f',
-            fontSize: '25px'
+            fontSize: '25px',
           },
           moonIcon: {
             color: '#fff',
-            fontSize: '20px'
-          }
+            fontSize: '20px',
+          },
         })
       }
     })
@@ -102,8 +102,8 @@ class App extends PureComponent {
         source.index,
         destination.index,
         draggableId,
-        type
-      )
+        type,
+      ),
     )
   }
 
@@ -121,11 +121,11 @@ class App extends PureComponent {
                 aria-label="Menu"
               />
               <Typography variant="h6" color="inherit" style={styles.grow}>
-              <div className="wrapper-button">
-                <span className="coracao um">♥</span>
-                <span className="coracao dois">♥</span>
-                <div className="button noselect">Project Board</div>
-              </div>
+                <div className="wrapper-button">
+                  <span className="coracao um">♥</span>
+                  <span className="coracao dois">♥</span>
+                  <div className="button noselect">Project Board</div>
+                </div>
               </Typography>
               <span style={{ marginRight: '10px' }}>
                 <i style={this.state.sunIcon} className="far fa-sun" />
@@ -191,7 +191,7 @@ class App extends PureComponent {
 const mapStateToProps = state => ({
   lists: state.lists,
   listOrder: state.listOrder,
-  cards: state.cards
+  cards: state.cards,
 })
 
 export default connect(mapStateToProps)(App)

@@ -4,6 +4,13 @@ body {
   margin: -10px -10px 10px -10px !important;
 }
 
+h3{
+  font-family: 'Ubuntu', monospace!important;
+  letter-spacing: 1px!important;
+  word-spacing: 3px;
+  text-transform: capitalize;
+}
+
 .wrapper-button {
   position: absolute;
   left: 165px;

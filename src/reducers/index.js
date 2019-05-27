@@ -6,5 +6,5 @@ import cardsReducer from './cardsReducer'
 export default combineReducers({
   lists: listsReducer,
   listOrder: listOrderReducer,
-  cards: cardsReducer
+  cards: cardsReducer,
 })

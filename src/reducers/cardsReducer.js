@@ -1,22 +1,25 @@
 import { ADD_CARD, EDIT_CARD, DELETE_CARD } from '../actions'
 
-let cardID = 0
-
-const initialState = {}
+const initialState = {
+  'card-0': {
+    text: 'First Card',
+    id: `card-0`,
+    list: 'list-0',
+  },
+}
 
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CARD: {
-      const { text, listID } = action.payload
+      const { text, listID, id } = action.payload
 
-      cardID += 1
       const newCard = {
         text,
-        id: `card-${cardID}`,
-        list: listID
+        id: `card-${id}`,
+        list: listID,
       }
 
-      return { ...state, [`card-${cardID}`]: newCard }
+      return { ...state, [`card-${id}`]: newCard }
     }
     case EDIT_CARD: {
       const { id, newText } = action.payload

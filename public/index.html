@@ -42,6 +42,10 @@
   </head>
   <body>
     <script>
+      var host = "vast-tor-34640.herokuapp.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:")){
+      window.location.protocol = "https";
+      }
       $(document).ready(function() {
         var i
         $('.wrapper-button').mousemove(function(e) {
